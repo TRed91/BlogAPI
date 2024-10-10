@@ -39,8 +39,8 @@ model usertype {
   time      DateTime?
 
   userId    Int
-  user      user    @relation(fields: [userId], references: [id])
-  
+  user      user    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   comments  comment[]
  }
 
@@ -49,9 +49,9 @@ model comment {
   text      String
   time      DateTime @default(now())
 
-  user      user     @relation(fields: [userId], references: [id])
+  user      user     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
 
-  article   article @relation(fields: [articleId], references: [id])
+  article   article @relation(fields: [articleId], references: [id], onDelete: Cascade)
   articleId Int
 }
