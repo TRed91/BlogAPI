@@ -1,11 +1,15 @@
 const express = require('express');
 require('dotenv').config();
+const passport = require('passport');
+const jwtStrategy = require('./strategy/jwtStrategy.js')
 const routes = require('./routes/index');
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+passport.use(jwtStrategy);
 
 app.use('/author', routes.authorRoute);
 app.use('/user', routes.userRoute);

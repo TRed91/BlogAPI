@@ -1,5 +1,7 @@
 const { validationResult, body } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
 const db = require('../db/userQueries');
 
 const validateUser = [
@@ -121,3 +123,29 @@ exports.userDelete = async (req, res) => {
         return res.status(500).json({ message: 'Deletion failed' });
     }
 }
+
+exports.userLogin = async (req, res) => {
+    try{
+        const user = await db.userFindByName(req.body.name);
+        if (!user) {
+            return res.status(400).json({ message: 'User not found' });
+        }
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: 'Wrong Password' });
+        }
+
+        jwt.sign({user: user}, 'dinkelberg', (err, token) => {
+            if (err) {
+                console.error(err.message);
+                return res.status(400).json({ error: err.message });
+            }
+            return res.json({ result: 'success', token: token });
+        });
+    } catch (err) {
+        console.error('login error: ', err.message);
+        res.status(500).json({ message: 'Server error' })
+    }
+}
+
+exports.authentication = passport.authenticate('jwt', { session: false })

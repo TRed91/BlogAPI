@@ -31,6 +31,12 @@ exports.userFind = async(id) => {
     });
 }
 
+exports.userFindByName = async(name) => {
+    return await prisma.user.findUnique({
+        where: { name: name },
+    });
+}
+
 exports.userFindMany = async (usertypeId) => {
     return await prisma.user.findMany({
         where: { usertypeId: usertypeId },
