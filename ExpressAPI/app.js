@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 passport.use(jwtStrategy);
 
-app.use('/author', routes.authorRoute);
+app.use('/authors', routes.authorRoute);
 app.use('/user', routes.userRoute);
 
 const PORT = process.env.PORT || 3000;

@@ -1,19 +1,21 @@
 const { Router } = require('express');
-const controller = require('../controllers/userController');
+const authenticate = require('./authentication');
+const { userController, articleController } = require('../controllers/index');
 const router = Router();
 
-router.get('/', userTypeSet, controller.userGetMany);
-router.get('/:userId', userTypeSet, controller.userGet);
-router.post('/',userTypeSet ,controller.userPost);
-router.put('/:userId',userTypeSet , controller.userPut);
-router.delete('/:userId',userTypeSet , controller.userDelete);
+router.get('/', userTypeSet, userController.userGetMany);
+router.get('/:userId', userTypeSet, userController.userGet);
+router.post('/',userTypeSet ,userController.userPost);
+router.put('/:userId',userTypeSet , userController.userPut);
+router.delete('/:userId',userTypeSet , userController.userDelete);
 
-router.post('/login', controller.userLogin);
-
+router.post('/login', userController.userLogin);
 
 function userTypeSet (req, res, next) {
     req.author = true;
     next();
 }
+
+router.post('/:userId/articles', authenticate, articleController.articlePost);
 
 module.exports = router;

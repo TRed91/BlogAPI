@@ -3,5 +3,5 @@ const userRoute = require('./userRoute');
 
 module.exports = {
     authorRoute,
-    userRoute
+    userRoute,
 }

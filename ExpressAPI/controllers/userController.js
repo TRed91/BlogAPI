@@ -1,7 +1,6 @@
 const { validationResult, body } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
 const db = require('../db/userQueries');
 
 const validateUser = [
@@ -147,5 +146,3 @@ exports.userLogin = async (req, res) => {
         res.status(500).json({ message: 'Server error' })
     }
 }
-
-exports.authentication = passport.authenticate('jwt', { session: false })
