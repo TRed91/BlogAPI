@@ -28,6 +28,11 @@ exports.userUpdate = async(data) => {
 exports.userFind = async(id) => {
     return await prisma.user.findUnique({
         where: { id: id },
+        select: {
+            name: true,
+            email: true,
+            registered: true,        
+        }
     });
 }
 
