@@ -37,6 +37,7 @@ exports.articleReadAllByUser = async(authorId) => {
 exports.articleReadOne = async (articleId) => {
     return await prisma.article.findUnique({
         where: { id: articleId },
+        include: { comments: true }, 
     });
 }
 
