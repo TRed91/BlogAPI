@@ -19,6 +19,6 @@ function userTypeSet (req, res, next) {
 router.post('/:userId/comments/:articleId', authenticate, commentController.commentPost);
 router.get('/comments/:commentId', commentController.commentGet);
 router.put('/comments/:commentId',authenticate ,commentController.commentPut);
-router.delete('/comments/:commentId',authenticate, commentController.commentDelete);
+router.delete('/comments/:commentId',authenticate, commentController.commentDelete)
 
 module.exports = router;

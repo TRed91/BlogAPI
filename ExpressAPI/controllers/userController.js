@@ -28,7 +28,7 @@ exports.userPost = [
         const errorMessages = errors.array().map(e => e.msg);
 
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errorMessages });
+            return res.status(400).json({ result: 'error' ,errors: errorMessages });
         }
 
         bcrypt.hash(password, 10, async(err, hashedPW) => {
@@ -48,7 +48,7 @@ exports.userPost = [
                 } else {
                     errMsg = 'connection error';
                 }
-                return res.status(500).json({ error: 'error querying database', message: errMsg } )
+                return res.status(500).json({ result: 'error', error: 'error querying database', message: errMsg } )
             }
         });
     }
@@ -65,7 +65,7 @@ exports.userPut = [
         const errorMessages = errors.array().map(e => e.msg);
 
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errorMessages });
+            return res.status(400).json({ result: 'error', errors: errorMessages });
         }
 
         bcrypt.hash(password, 10, async(err, hashedPW) => {
@@ -84,7 +84,7 @@ exports.userPut = [
                 } else {
                     errMsg = 'connection error';
                 }
-                return res.status(500).json({ error: 'error querying database', message: errMsg } )
+                return res.status(500).json({ result: 'error', error: errMsg })
             }
         });
     }
@@ -94,10 +94,10 @@ exports.userGet = async (req, res) => {
     const id = parseInt(req.params.userId);
     try {
         const data = await db.userFind(id);
-        return res.json({ author: data });
+        return res.json({ result: 'success', author: data });
     } catch (err) {
         console.error('Read author error: ', err.message);
-        return res.status(500).json({ message: 'Author not found.' });
+        return res.status(500).json({ result: 'error', error: 'Author not found.' });
     }
 }
 
@@ -105,10 +105,10 @@ exports.userGetMany = async (req, res) => {
     const userType = req.author ? 1 : 2;
     try {
         const users = await db.userFindMany(userType);
-        return res.json({ users: users });
+        return res.json({ result: 'success', users: users });
     } catch (err) {
         console.error('Find users error: ', err.message);
-        return res.status(500).json({ message: 'Database error' });
+        return res.status(500).json({ result: 'error', error: 'Database error' });
     }
 }
 
@@ -116,10 +116,10 @@ exports.userDelete = async (req, res) => {
     const id = parseInt(req.params.userId);
     try {
         const result = await db.userDelete(id)
-        return res.json({ result: result });
+        return res.json({ result: 'success', result: result });
     } catch (err) {
         console.error('Authot delete error: ', err.message);
-        return res.status(500).json({ message: 'Deletion failed' });
+        return res.status(500).json({ result: 'error', error: 'Deletion failed' });
     }
 }
 
@@ -127,11 +127,11 @@ exports.userLogin = async (req, res) => {
     try{
         const user = await db.userFindByName(req.body.name);
         if (!user) {
-            return res.status(400).json({ message: 'User not found' });
+            return res.status(400).json({ result: 'error', error: 'User not found' });
         }
         const isMatch = await bcrypt.compare(req.body.password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Wrong Password' });
+            return res.status(400).json({ result: 'error', error: 'Wrong Password' });
         }
 
         jwt.sign({user: user}, 'dinkelberg', (err, token) => {
@@ -143,6 +143,6 @@ exports.userLogin = async (req, res) => {
         });
     } catch (err) {
         console.error('login error: ', err.message);
-        res.status(500).json({ message: 'Server error' })
+        res.status(500).json({ result: 'error', message: 'Server error' })
     }
 }

@@ -16,7 +16,6 @@ function userTypeSet (req, res, next) {
     next();
 }
 
-
 router.post('/:userId/articles', authenticate, articleController.articlePost);
 router.put('/:userId/articles/:articleId', authenticate, articleController.articlePutContent);
 router.put('/:userId/publish/:articleId', authenticate, articleController.articlePutPublished);
