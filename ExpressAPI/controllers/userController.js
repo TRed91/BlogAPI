@@ -39,6 +39,7 @@ exports.userPost = [
             try {
                 const type = req.author ? 1 : 2;
                 const result = await db.userCreate({ name, email, password: hashedPW, type: type });
+                console.log('user created: ', result);
                 return res.json({ result: 'success', created: result });
             } catch (err) {
                 console.error('Author post error: ', err);
@@ -48,7 +49,7 @@ exports.userPost = [
                 } else {
                     errMsg = 'connection error';
                 }
-                return res.status(500).json({ result: 'error', error: 'error querying database', message: errMsg } )
+                return res.status(500).json({ result: 'error', error: errMsg } )
             }
         });
     }
@@ -139,7 +140,13 @@ exports.userLogin = async (req, res) => {
                 console.error(err.message);
                 return res.status(400).json({ error: err.message });
             }
-            return res.json({ result: 'success', token: token });
+            return res.json({ result: 'success', 
+                              user: { name: user.name,
+                                      email: user.email,
+                                      id: user.id,
+                                      registered: user.registered,
+                               },
+                              token: token });
         });
     } catch (err) {
         console.error('login error: ', err.message);
