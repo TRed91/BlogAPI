@@ -32,7 +32,7 @@ function Login() {
                 setLoginName('');
                 setLoginPw('');
                 console.log(data.result);
-                setUser({data: data.user, token: data.token});
+                setUser(data.user);
             } else {
                 console.log(data.result, data.error);
             }
