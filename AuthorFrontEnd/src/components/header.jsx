@@ -10,7 +10,7 @@ function Header ({user}) {
     }
 
     return (
-        <div>
+        <div className="header">
             <ul>
                 <li><a href="/">New Article</a></li>
                 {user && <li><a href="/articles">Articles</a></li>}

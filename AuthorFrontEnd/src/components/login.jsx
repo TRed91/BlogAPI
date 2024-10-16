@@ -39,7 +39,7 @@ function Login() {
         })
     }
     return (
-        <div>
+        <div className="main">
             <form onSubmit={handleLogin}>
             <div>
                 <label htmlFor="name">Username</label>

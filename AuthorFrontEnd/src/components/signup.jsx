@@ -47,7 +47,7 @@ function Signup() {
 
     if (!user) {
         return (
-            <div>
+            <div className="main">
                 <form onSubmit={handleSignup}>
                     <div>
                         <label htmlFor="name">Username</label>

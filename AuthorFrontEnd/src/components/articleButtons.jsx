@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 
-function ArticleButtons({ userId, articleId, published, message, rerender, toggleEdit }) {
+function ArticleButtons({ userId, articleId, published, message, edit, rerender, toggleEdit }) {
     const navigate = useNavigate();
 
     const handlePublish = () => {
@@ -54,11 +54,11 @@ function ArticleButtons({ userId, articleId, published, message, rerender, toggl
 
     return (
         <div>
-            <div>
-                <button onClick={() => navigate(`/articles/${articleId}`)}>Details</button>
-                <button onClick={handlePublish}>{published ? 'Unpublish' : 'Publish'}</button>
-                <button onClick={() => toggleEdit()}>Edit</button>
-                <button onClick={handleDelete}>Delete</button>
+            <div className="buttonsContainer">
+                {!edit && <button onClick={() => navigate(`/articles/${articleId}`)}>Details</button>}
+                {!edit && <button onClick={handlePublish}>{published ? 'Unpublish' : 'Publish'}</button>}
+                <button onClick={() => toggleEdit()}>{edit ? 'Cancel' : 'Edit'}</button>
+                {!edit && <button onClick={handleDelete} className="deleteBtn">Delete</button>}
             </div>
         </div>
     )

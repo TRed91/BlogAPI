@@ -34,16 +34,15 @@ function ArticlesPage() {
     }
 
     return (
-        <div>
-            <h1>Articles</h1>
-            <p>{msg}</p>
+        <div className="articlesMain">
+            <p className="resMsg">{msg}</p>
             <div>
                 {user && articles.map(a => {
                     return (
-                        <div key={articles.indexOf(a)}>
-                            <h2>{a.title}</h2>
-                            <p>{a.text}</p>
-                            <p>{a.time ? 'Published at: ' + a.time : 'not published'}</p>
+                        <div key={articles.indexOf(a)} className="articleCard">
+                            <h2>{!toggleEdit && a.title}</h2>
+                            <p>{!toggleEdit && a.text}</p>
+                            <p>{!toggleEdit && (a.time ? 'Published at: ' + a.time : 'not published')}</p>
                             {toggleEdit && <ArticleEdit userId={user.id} 
                                                         article={a} 
                                                         toggleEdit={() => setToggleEdit(false)}
@@ -53,6 +52,7 @@ function ArticlesPage() {
                                             articleId={a.id} 
                                             published={a.published} 
                                             message={displayMessage}
+                                            edit={toggleEdit}
                                             rerender={() => forceRerender(!toggle)}
                                             toggleEdit={() => setToggleEdit(!toggleEdit)}/>
                         </div>

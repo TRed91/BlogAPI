@@ -36,11 +36,10 @@ function ArticleForm() {
     
     if (user) {
         return (
-            <div>
+            <div className="main">
                 <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="title">Title</label>
-                    <input type="text" name="title" id="title" placeholder="title" required
+                    <input type="text" name="title" id="title" placeholder="title" className="title" required
                             value={articleTitle}
                             onChange={(e) => setArticleTitle(e.target.value)} />
                 </div>
@@ -53,7 +52,7 @@ function ArticleForm() {
                 <button>Submit</button>
                 </form>
                 <div>
-                    <p>{postResponse}</p>
+                    <p className="resMsg">{postResponse}</p>
                 </div>
             </div>
         )

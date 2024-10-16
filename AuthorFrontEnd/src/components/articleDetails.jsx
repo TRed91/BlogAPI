@@ -8,7 +8,7 @@ function ArticleDetails () {
     const [ user, setUser ] = useOutletContext();
     const [ article, setArticle] = useState(null);
     const [ toggleEdit, setToggleEdit ] = useState(false);
-    const [ msg, setMsg] = useState('');
+    const [ msg, setMsg] = useState('Loading...');
     const [ toggle, forceRerender] = useState(false);
 
     useEffect(() => {
@@ -22,7 +22,13 @@ function ArticleDetails () {
             })
             .then(res => res.json())
             .then(data => {
-                setArticle(data.article);
+                if (data.result !== 'error') {
+                    setArticle(data.article);
+                } else if (data.error === 'unauthorized') {
+                    setMsg('Unauthorized');
+                } else {
+                    setMsg('Not found');
+                }
             })
             .catch(err => console.error(err.message));
         }
@@ -30,7 +36,7 @@ function ArticleDetails () {
 
     if (article) {
         return (
-            <div>
+            <div className="detailsMain">
                 {toggleEdit && <ArticleEdit userId={user.id} 
                                                             article={article} 
                                                             toggleEdit={() => setToggleEdit(false)}
@@ -63,7 +69,7 @@ function ArticleDetails () {
     } else {
         return (
             <div>
-                <h2>Loading...</h2>
+                <h2>{msg}</h2>
             </div>
         )
     }

@@ -1,0 +1,131 @@
+:root {
+    --color-scheme-1: #d5eaff;
+    --shaodow-1: #00000032;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#root {
+    padding: 0;
+}
+
+.header {
+    background-color: var(--color-scheme-1);
+    padding: 1rem;
+    box-shadow: 0px 2px 3px var(--shaodow-1);
+}
+
+ul {
+    display: flex;
+    gap: 5rem;
+    justify-content: end;
+    padding-right: 3rem;
+
+    font-size: 20px;
+    text-shadow: 1px 1px 2px var(--shaodow-1);
+}
+
+li {
+    list-style: none;
+}
+
+a, a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 50vh;
+}
+
+.articlesMain {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    background-color: var(--color-scheme-1);
+    padding: 1rem 4rem;
+
+    box-shadow: 2px 2px 2px var(--shaodow-1);
+    border-radius: 3px;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    width: 30vw;
+    height: 20vh;
+}
+
+.title {
+    font-size: 20px;
+    padding: 5px;
+}
+
+.resMsg {
+    color: blue;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.articleCard {
+    border: 1px solid black;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px var(--shaodow-1);
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.articleCard > * {
+    flex: 0 0 25%
+}
+
+.buttonsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+
+    max-width: 200px;
+}
+
+button {
+    font-size: 18px;
+    padding: 5px 10px;
+
+    border: none;
+    border-radius: 3px;
+
+    background-color: #3b39db;
+    color: white;
+}
+
+.deleteBtn {
+    background-color: #a30000;
+    color: white;
+}
+
+.detailsMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
