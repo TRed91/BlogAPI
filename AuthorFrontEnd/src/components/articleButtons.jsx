@@ -55,6 +55,7 @@ function ArticleButtons({ userId, articleId, published, message, rerender, toggl
     return (
         <div>
             <div>
+                <button onClick={() => navigate(`/articles/${articleId}`)}>Details</button>
                 <button onClick={handlePublish}>{published ? 'Unpublish' : 'Publish'}</button>
                 <button onClick={() => toggleEdit()}>Edit</button>
                 <button onClick={handleDelete}>Delete</button>

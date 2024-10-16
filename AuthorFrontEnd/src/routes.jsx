@@ -3,6 +3,7 @@ import ArticleForm from "./components/articleForm"
 import Login from "./components/login";
 import Signup from "./components/signup";
 import Articles from "./components/articles";
+import ArticleDetails from "./components/articleDetails";
 
 const routes = [
     {
@@ -12,8 +13,9 @@ const routes = [
             { index: true, element: <ArticleForm /> },
             { path: "login", element: <Login />},
             { path: "signup", element: <Signup />},
-            { path: "articles", element: <Articles />}
-        ]
+            { path: "articles", element: <Articles />},
+            { path: "articles/:articleId", element: <ArticleDetails />},
+        ],
     },
 ];
 
