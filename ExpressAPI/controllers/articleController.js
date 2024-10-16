@@ -40,6 +40,11 @@ exports.articleGetOne = async (req, res) => {
     try {
         const articleId = parseInt(req.params.articleId);
         const result = await db.articleReadOne(articleId);
+
+        if(req.user.id !== result.userId) {
+            return res.status(401).json({ result: 'error', error: 'unauthorized' })
+        }
+
         return res.json({ result: 'success', article: result });
     } catch (err) {
         console.error(err.message);
@@ -62,7 +67,7 @@ exports.articleDelete = async(req, res) => {
     try {
         const articleId = parseInt(req.params.articleId);
         await db.articleDelete(articleId);
-        return res.json({ result: 'deleted successfully' });
+        return res.json({ result: 'success', message: 'article deleted' });
     } catch (err) {
         console.error(err.message);
         return res.status(500).json({ result: 'error', error: 'server error' });
