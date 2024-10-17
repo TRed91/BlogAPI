@@ -12,7 +12,7 @@ const routes = [
             { path: 'login', element: <Login/>},
             { path: 'signup', element: <Signup/> },
             { path: 'articles', element: <Articles/> },
-            { path: 'articles/:id', element: <ArticleDetail />},
+            { path: 'articles/:articleId', element: <ArticleDetail />},
         ],
     },
 ];
