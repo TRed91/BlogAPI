@@ -2,6 +2,7 @@ import App from './App';
 import Login from './components/login/login';
 import Signup from './components/signup/signup';
 import Articles from './components/articles/articles';
+import ArticleDetail from './components/articleDetail/articleDetails';
 
 const routes = [
     {
@@ -10,7 +11,8 @@ const routes = [
         children: [
             { path: 'login', element: <Login/>},
             { path: 'signup', element: <Signup/> },
-            { path: 'articles', element: <Articles/> }
+            { path: 'articles', element: <Articles/> },
+            { path: 'articles/:id', element: <ArticleDetail />},
         ],
     },
 ];

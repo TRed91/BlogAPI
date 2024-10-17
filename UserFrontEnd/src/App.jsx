@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 function App() {
   const [ user, setUser ] = useState(null);
 
-  /*
   useEffect(() => {
     fetch(`${import.meta.env.VITE_MYAPI_HOST}/authenticate`, {
       method: 'get',
@@ -19,7 +18,6 @@ function App() {
     .then(data => setUser(data.user))
     .catch(err => console.error(err.message));
   }, []);
-  */
 
   return (
     <>

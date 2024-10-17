@@ -45,7 +45,7 @@ function Signup() {
     if (!user) {
         return (
             <main className="main">
-                <form onChange={handleSignup}>
+                <form onSubmit={handleSignup}>
                     <div>
                         <label htmlFor="name">Username</label>
                         <input  type="text" name="name" id="name" required

@@ -19,18 +19,17 @@ function Articles() {
         .catch(err => err.message);
     }, []);
 
+
     return (
         <main>
             <div>
                 {articles.length > 0 
                 ? articles.map(a => {
-                    <div>
+                    return <div key={a.id}>
                         <h2>{a.title}</h2>
                         <p>{a.text}</p>
                         <div>{a.time}</div>
-                        <div>{a.comments.map(c => {
-                            <p>{c.text}</p>
-                        })}</div>
+                        <a href={`articles/${a.id}`}>Detail</a>
                     </div>
                 }) 
                 : <h2>Not articles published</h2>}
