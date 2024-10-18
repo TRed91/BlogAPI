@@ -29,7 +29,7 @@ function Articles() {
                     return <div key={a.id} className={styles.articleCard}>
                         <h2>{a.title}</h2>
                         <p>{a.text}</p>
-                        <div className={styles.time}>{a.time}</div>
+                        <div className={styles.time}>{a.time.substring(0,10)}</div>
                         <a href={`articles/${a.id}`} id={styles.detailLink}>Detail</a>
                     </div>
                 }) 

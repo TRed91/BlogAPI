@@ -52,7 +52,7 @@ function ArticleDetail(){
             <main>
                 <h2>{article.title}</h2>
                 <p>{article.text}</p>
-                <div className={styles.time}>{article.time}</div>
+                <div className={styles.time}>{article.time.substring(0,10) + ', ' + article.time.substring(11,16)}</div>
                 <hr />
                 {user && <CommentForm   userId={user.id} 
                                         articleId={articleId} 
@@ -63,7 +63,7 @@ function ArticleDetail(){
                     {article.comments.map(c => {
                         return <div key={c.id}>
                             <p>{c.text}</p>
-                            <div className={styles.time}>{c.time}</div>
+                            <div className={styles.time}>{c.time.substring(0,10) + ', ' + c.time.substring(11,16)}</div>
                             {user && c.userId === user.id && 
                             <div>
                                 <button onClick={() => handleDelete(c.id)}>Delete</button>

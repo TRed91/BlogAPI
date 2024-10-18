@@ -7,7 +7,7 @@ function App() {
   const [ user, setUser ] = useState(null);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_MYAPI_HOST}/authenticate`, {
+    fetch(`${import.meta.env.VITE_MYAPI_HOST}/authenticate/reader`, {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
