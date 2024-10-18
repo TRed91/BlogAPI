@@ -34,9 +34,29 @@ exports.articleReadAllByUser = async(authorId) => {
     });
 }
 
+exports.articleReadAll = async() => {
+    return await prisma.article.findMany();
+}
+
+exports.articleReadAllPublished = async() => {
+    return await prisma.article.findMany({
+        where: { published: true },
+    });
+}
+
 exports.articleReadOne = async (articleId) => {
     return await prisma.article.findUnique({
         where: { id: articleId },
+        include: { comments: true }, 
+    });
+}
+
+exports.articleReadOnePublished = async (articleId) => {
+    return await prisma.article.findUnique({
+        where: {
+                id: articleId,
+                published: true,
+            },
         include: { comments: true }, 
     });
 }

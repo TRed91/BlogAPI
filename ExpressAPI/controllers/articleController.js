@@ -52,10 +52,41 @@ exports.articleGetOne = async (req, res) => {
     }
 }
 
-exports.articleGetAll = async(req, res) => {
+exports.articleGetOnePublished = async (req, res) => {
+    try {
+        const articleId = parseInt(req.params.articleId);
+        const result = await db.articleReadOnePublished(articleId);
+        return res.json({ result: 'success', article: result });
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).json({ result: 'error', error: 'server error' });
+    }
+}
+
+exports.articleGetAllByUser = async(req, res) => {
     try {
         const userId = parseInt(req.params.userId);
         const result = await db.articleReadAllByUser(userId);
+        return res.json({ result: 'success', articles: result });
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).json({ result: 'error', error: 'server error' });
+    }
+}
+
+exports.articleGetAll = async(req, res) => {
+    try {
+        const result = await db.articleReadAll();
+        return res.json({ result: 'success', articles: result });
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).json({ result: 'error', error: 'server error' });
+    }
+}
+
+exports.articleGetAllPublished = async(req, res) => {
+    try {
+        const result = await db.articleReadAllPublished();
         return res.json({ result: 'success', articles: result });
     } catch (err) {
         console.error(err.message);

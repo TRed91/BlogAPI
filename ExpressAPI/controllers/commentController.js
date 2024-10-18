@@ -37,6 +37,12 @@ exports.commentGet = async (req, res) => {
 exports.commentDelete = async (req, res) => {
     try{
         const commentId = parseInt(req.params.commentId);
+        const comment = await db.commentRead(commentId);
+
+        if(req.user.id !== comment.userId) {
+            return res.status(401).json({ result: 'error', error: 'Unauthorized deletion' })
+        }
+        
         await db.commentDelete(commentId);
         return res.json({ result: 'success', message: 'Comment deleted successfully' });
     } catch (err) {

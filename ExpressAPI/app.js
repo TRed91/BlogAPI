@@ -18,6 +18,7 @@ app.get('/authenticate', authenticate,
 
 app.use('/authors', routes.authorRoute);
 app.use('/users', routes.userRoute);
+app.use('/articles', routes.articlesRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Express app listening on port ${PORT}`));

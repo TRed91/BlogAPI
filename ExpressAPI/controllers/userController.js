@@ -98,6 +98,7 @@ exports.userGet = async (req, res) => {
         return res.json({ result: 'success', author: data });
     } catch (err) {
         console.error('Read author error: ', err.message);
+        console.error(err);
         return res.status(500).json({ result: 'error', error: 'Author not found.' });
     }
 }
@@ -119,7 +120,7 @@ exports.userDelete = async (req, res) => {
         const result = await db.userDelete(id)
         return res.json({ result: 'success', result: result });
     } catch (err) {
-        console.error('Authot delete error: ', err.message);
+        console.error('Author delete error: ', err.message);
         return res.status(500).json({ result: 'error', error: 'Deletion failed' });
     }
 }
