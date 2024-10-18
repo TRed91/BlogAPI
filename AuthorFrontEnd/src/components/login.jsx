@@ -6,6 +6,7 @@ function Login() {
     const navigate = useNavigate();
     const [ loginName, setLoginName ] = useState("");
     const [ loginPw, setLoginPw ] = useState("");
+    const [ err, setErr ] = useState('')
 
     useEffect(() => {
         if (user) {
@@ -35,11 +36,13 @@ function Login() {
                 setUser(data.user);
             } else {
                 console.log(data.result, data.error);
+                setErr(data.error);
             }
         })
     }
     return (
         <div className="main">
+            <p>{err}</p>
             <form onSubmit={handleLogin}>
             <div>
                 <label htmlFor="name">Username</label>
@@ -53,7 +56,7 @@ function Login() {
                         value={loginPw}
                         onChange={(e) => setLoginPw(e.target.value)} />
             </div>
-            <button>Login</button>
+            <button>Log In</button>
             </form>
         </div>
     )

@@ -51,16 +51,17 @@ function ArticleDetails () {
                 <h2>{article.title}</h2>
                 <hr />
                 <p>{article.text}</p>
-                <div>
-                    {article.published ? article.time : 'Not Published'}
+                <div className="time">
+                    {article.published ? article.time.substring(0, 10) + ' ' + article.time.substring(11, 16) : 'Not Published'}
                 </div>
                 <hr />
                 <h3>Comments:</h3>
                 <div>
                     {article.comments.map(c => {
-                        <div>
+                        return <div>
                             <div>{c.text}</div>
-                            <div>{c.time}</div>
+                            <div className="time">{c.time.substring(0,10)} {c.time.substring(11, 16)}</div>
+                            <hr />
                         </div>
                     })}
                 </div>
