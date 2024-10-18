@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom"
+import styles from './signup.module.css'
 
 function Signup() {
     const [ user, setUser ] = useOutletContext();
@@ -74,7 +75,7 @@ function Signup() {
                 </form>
                 <div>
                     {errors && errors.map(e => {
-                        return <p key={e}>{e}</p>
+                        return <p key={e} className={styles.errMsg}>{e}</p>
                     })}
                 </div>
             </main>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import CommentForm from "../commentForm/commentForm";
+import styles from './articleDetails.module.css';
 
 function ArticleDetail(){
     const { articleId } = useParams();
@@ -51,7 +52,7 @@ function ArticleDetail(){
             <main>
                 <h2>{article.title}</h2>
                 <p>{article.text}</p>
-                <div>{article.time}</div>
+                <div className={styles.time}>{article.time}</div>
                 <hr />
                 {user && <CommentForm   userId={user.id} 
                                         articleId={articleId} 
@@ -62,7 +63,7 @@ function ArticleDetail(){
                     {article.comments.map(c => {
                         return <div key={c.id}>
                             <p>{c.text}</p>
-                            <div>{c.time}</div>
+                            <div className={styles.time}>{c.time}</div>
                             {user && c.userId === user.id && 
                             <div>
                                 <button onClick={() => handleDelete(c.id)}>Delete</button>

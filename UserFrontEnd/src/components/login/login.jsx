@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import styles from './login.module.css';
 
 function Login() {
     const [ user, setUser ] = useOutletContext();
     const navigate = useNavigate();
     const [ loginName, setLoginName ] = useState('');
     const [ loginPw, setLoginPw ] = useState('');
+    const [ msg, setMsg ] = useState('');
 
     useEffect(() => {
         if (user) {
@@ -35,12 +37,13 @@ function Login() {
                 setUser(data.user);
             } else {
                 console.log(data.result, data.error);
+                setMsg(data.error);
             }
         })
     }
     return (
         <main className="main">
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} className={styles.loginForm}>
                 <div>
                     <label htmlFor="name">Username</label>
                     <input  type="text" name="name" id="name" required
@@ -55,6 +58,7 @@ function Login() {
                 </div>
                 <button>Log In</button>
             </form>
+            <div className={styles.errMsg}>{msg}</div>
         </main>
     )
 }

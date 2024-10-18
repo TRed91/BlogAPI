@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import styles from './articles.module.css'
 
 function Articles() {
     const [ user, setUser ] = useOutletContext();
@@ -22,14 +23,14 @@ function Articles() {
 
     return (
         <main>
-            <div>
+            <div className={styles.articleContainer}>
                 {articles.length > 0 
                 ? articles.map(a => {
-                    return <div key={a.id}>
+                    return <div key={a.id} className={styles.articleCard}>
                         <h2>{a.title}</h2>
                         <p>{a.text}</p>
-                        <div>{a.time}</div>
-                        <a href={`articles/${a.id}`}>Detail</a>
+                        <div className={styles.time}>{a.time}</div>
+                        <a href={`articles/${a.id}`} id={styles.detailLink}>Detail</a>
                     </div>
                 }) 
                 : <h2>Not articles published</h2>}
