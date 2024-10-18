@@ -9,8 +9,6 @@ router.post('/',userTypeSet ,userController.userPost);
 router.put('/:userId',userTypeSet , userController.userPut);
 router.delete('/:userId',userTypeSet , userController.userDelete);
 
-router.get('/articles', userTypeSet, articleController.articleGetAllPublished)
-
 router.post('/login', userController.userLogin);
 
 function userTypeSet (req, res, next) {

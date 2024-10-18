@@ -32,8 +32,9 @@ exports.userFind = async(id) => {
             id: true,
             name: true,
             email: true,
-            registered: true,        
-        }
+            registered: true,
+            usertypeId: true,        
+        },
     });
 }
 

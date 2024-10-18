@@ -135,6 +135,43 @@ exports.userLogin = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ result: 'error', error: 'Wrong Password' });
         }
+        if (user.usertypeId != 2){
+            return res.status(401).json({ result: 'error', error: 'Unauthorized' });
+        }
+
+        jwt.sign({user: user}, 'dinkelberg', (err, token) => {
+            if (err) {
+                console.error(err.message);
+                return res.status(400).json({ error: err.message });
+            }
+            return res.json({ result: 'success', 
+                              user: { name: user.name,
+                                      email: user.email,
+                                      id: user.id,
+                                      registered: user.registered,
+                               },
+                              token: token });
+        });
+    } catch (err) {
+        console.error('login error: ', err.message);
+        res.status(500).json({ result: 'error', message: 'Server error' })
+    }
+}
+
+exports.authorLogin = async (req, res) => {
+    try{
+        const user = await db.userFindByName(req.body.name);
+        if (!user) {
+            return res.status(400).json({ result: 'error', error: 'User not found' });
+        }
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ result: 'error', error: 'Wrong Password' });
+        }
+
+        if (user.usertypeId != 1){
+            return res.status(401).json({ result: 'error', error: 'Unauthorized' });
+        }
 
         jwt.sign({user: user}, 'dinkelberg', (err, token) => {
             if (err) {

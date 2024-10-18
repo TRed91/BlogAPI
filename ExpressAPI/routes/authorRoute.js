@@ -9,7 +9,7 @@ router.post('/',userTypeSet ,userController.userPost);
 router.put('/:userId',userTypeSet , userController.userPut);
 router.delete('/:userId',userTypeSet , userController.userDelete);
 
-router.post('/login', userController.userLogin);
+router.post('/login', userController.authorLogin);
 
 function userTypeSet (req, res, next) {
     req.author = true;

@@ -13,9 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 passport.use(jwtStrategy);
 
-app.get('/authenticate', authenticate, 
-    (req, res) => res.json({result: 'success', user: req.user}));
-
+app.use('/authenticate', routes.authenticationRoute);
 app.use('/authors', routes.authorRoute);
 app.use('/users', routes.userRoute);
 app.use('/articles', routes.articlesRoute);
